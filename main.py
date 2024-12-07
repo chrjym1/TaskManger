@@ -34,14 +34,15 @@ def dash_board():
             except ValueError as e:
                 print(f"Invalid input: {e}")
         elif choice == '4':
-            print("Undo functionality not implemented yet.")
+            task_queue.undo()
         elif choice == '5':
-            print("Redo functionality not implemented yet.")
+            task_queue.redo()
         elif choice == '6':
             print("Logging out...")
             break
         else:
             print("Invalid choice. Please enter 1, 2, 3, 4, 5, or 6.")
+
 
 def main():
     open(auth_file, 'a').close()
