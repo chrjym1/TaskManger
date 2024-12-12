@@ -19,17 +19,25 @@ def display_tasks():
 def dash_board():
     while True:
         clear_screen()
+        
+        # Display current tasks
         display_tasks()
-        print("\n" + "="*30)
+        
+        # Display history
+        print("\nHistory:")
+        task_queue.display_history()
+        
+        print("\n" + "="*60)
         print("          Dashboard")
-        print("="*30)
+        print("="*60)
         print("1. Create Task")
         print("2. View Tasks")
         print("3. Remove Task")
         print("4. Undo Task")
         print("5. Redo Task")
         print("6. Logout")
-        print("="*30)
+        print("="*60)
+        
         choice = input("Enter your choice: ")
 
         if choice == '1':
@@ -64,6 +72,7 @@ def dash_board():
             break
         else:
             input("Invalid choice. Please enter 1, 2, 3, 4, 5, or 6. Press Enter to continue...")
+
 
 def main():
     open(auth_file, 'a').close()
