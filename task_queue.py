@@ -143,6 +143,8 @@ class Queue:
             self.get_quadrant(task.quadrant).add_task(task.title, task.priority, task.quadrant)
             self.redo_stack.append(('add', task))
 
+        print(f"Action undone: {action} Task {task.task_id}")
+
     def redo(self):
         """Redoes the last undone action."""
         if not self.redo_stack:
@@ -159,6 +161,9 @@ class Queue:
             # Reapply a 'remove' action
             self.get_quadrant(task.quadrant).remove_task(task.task_id)
             self.undo_stack.append(('remove', task))
+
+        print(f"Action redone: {action} Task {task.task_id}")
+
 
     def display_queue(self):
         """Displays all tasks grouped by quadrants."""
