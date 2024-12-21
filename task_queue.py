@@ -75,6 +75,20 @@ class TaskList:
             current = current.next
         return None
 
+    def get_all_tasks(self):
+        tasks = []
+        current = self.head
+        while current:
+            tasks.append(current.task)
+            current = current.next
+        return tasks
+
+    def set_all_tasks(self, tasks):
+        self.head = None
+        self.task_counter = 1
+        for task in tasks:
+            self.add_task(task.title, task.priority, task.quadrant)
+
 class Queue:
     def __init__(self):
         self.quadrant_1 = TaskList()
@@ -164,7 +178,6 @@ class Queue:
 
         print(f"Action redone: {action} Task {task.task_id}")
 
-
     def display_queue(self):
         """Displays all tasks grouped by quadrants."""
         print("Quadrant 1: Urgent and Important")
@@ -185,3 +198,22 @@ class Queue:
         print("\nRedo Stack (most recent first):")
         for action, task in reversed(self.redo_stack):
             print(f"Action: {action}, Task: {task}")
+
+    def get_all_tasks(self):
+        """Returns all tasks in the queue."""
+        tasks = {
+            'quadrant_1': [task.__dict__ for task in self.quadrant_1.get_all_tasks()],
+            'quadrant_2': [task.__dict__ for task in self.quadrant_2.get_all_tasks()],
+            'quadrant_3': [task.__dict__ for task in self.quadrant_3.get_all_tasks()],
+            'quadrant_4': [task.__dict__ for task in self.quadrant_4.get_all_tasks()]
+        }
+        return tasks
+
+    def set_all_tasks(self, tasks):
+        """Sets all tasks in the queue."""
+        self.quadrant_1.set_all_tasks([Task(**task) for task in tasks.get('quadrant_1', [])])
+        self.quadrant_2.set_all_tasks([Task(**task) for task in tasks.get('quadrant_2', [])])
+        self.quadrant_3.set_all_tasks([Task(**task) for task in tasks.get('quadrant_3', [])])
+        self.quadrant_4.set_all_tasks([Task(**task) for task in tasks.get('quadrant_4', [])])
+
+    
