@@ -136,10 +136,10 @@ def dash_board(username):
                 "Invalid priority"
             )
             quadrant = input_with_validation(
-                "Enter task quadrant (1-4): ",
-                lambda x: int(x) if 1 <= int(x) <= 4 else ValueError("Quadrant must be between 1 and 4"),
-                "Invalid quadrant"
-            )
+                "Enter task quadrant (1: Urgent & Important, 2: Not Urgent but Important, 3: Urgent but Not Important, 4: Not Urgent & Not Important): ",
+                 lambda x: int(x) if 1 <= int(x) <= 4 else ValueError("Quadrant must be between 1 and 4"),
+                 "Invalid quadrant"
+)
             task_queue.add_task_to_queue(title, priority, quadrant)
             save_tasks(username)
             input("Task added successfully! Press Enter to continue...")
